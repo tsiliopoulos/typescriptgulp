@@ -6,6 +6,7 @@ var tsc = require('gulp-typescript');
 var sourcemaps = require('gulp-sourcemaps');
 var tscProject = tsc.createProject('tsconfig.json');
 var connect = require('gulp-connect');
+var open = require('gulp-open');
 
 var TypeScriptSources = [
     './Scripts/**/*.ts',
@@ -30,15 +31,15 @@ gulp.task('transpile', function () {
 
 });
 
-gulp.task("bower", function(){
-   return bower()
-    .pipe(gulp.dest(bowerDir)); 
+gulp.task("bower", function () {
+    return bower()
+        .pipe(gulp.dest(bowerDir));
 });
 
-gulp.task("html", function(){
-   gutil.log("html changed...");
-   gulp.src(HTMLSources)
-   .pipe(connect.reload());
+gulp.task("html", function () {
+    gutil.log("html changed...");
+    gulp.src(HTMLSources)
+        .pipe(connect.reload());
 });
 
 gulp.task("watch", function () {
@@ -53,4 +54,9 @@ gulp.task("connect", function () {
     });
 });
 
-gulp.task("default", ["transpile", "html", "connect", "watch"]);
+gulp.task('open', function () {
+    gulp.src('./index.html')
+        .pipe(open({uri: 'http://localhost:8080', app: 'Google Chrome'}));
+});
+
+gulp.task("default", ["transpile", "html", "connect", "open", "watch"]);
