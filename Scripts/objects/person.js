@@ -3,9 +3,10 @@ var objects;
     // PERSON class
     var Person = (function () {
         // CONSTRUCTOR ++++++++++++++++++++++
-        function Person(name, age) {
+        function Person(name, age, gender) {
             this._name = name;
             this._age = age;
+            this._gender = gender;
         }
         Person.prototype.sayHello = function () {
             console.log(this._name + " says hello!");
